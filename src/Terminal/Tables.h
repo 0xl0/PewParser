@@ -13,7 +13,7 @@ namespace PewParser {
     };
 
     template<size_t N>
-    static void DisplayTable(const std::array<TableRow, N> table)
+    static void DisplayTable(const std::array<TableRow, N>& table)
     {
         std::cout << " " << Logger::CustomBgColor(Logger::CustomPEColors::TABLE_HEADER);
         for (size_t i = 0; i < N; i++)
