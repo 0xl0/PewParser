@@ -5,9 +5,9 @@
 
 namespace PewParser {
 
-	class PEUtils
-	{
-	public:
-		static std::string TimeDateStampConverter(DWORD time);
-	};
+    class PEUtils
+    {
+    public:
+        static std::string TimeDateStampConverter(DWORD time);
+    };
 }

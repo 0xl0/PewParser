@@ -7,13 +7,13 @@
 
 namespace PewParser {
 
-	class PEFile;
+    class PEFile;
 
-	class OptionalHdrWrapper
-	{
-	public:
+    class OptionalHdrWrapper
+    {
+    public:
         enum Fields
-		{
+        {
             MAGIC = 0,
             LINKER_MAJOR,
             LINKER_MINOR,
@@ -45,48 +45,48 @@ namespace PewParser {
             LDR_FLAGS,
             RVAS_SIZES_NUM,
             DATA_DIR,
-			FIELDS_COUNT
+            FIELDS_COUNT
         };
-	public:
-		OptionalHdrWrapper(PEFile* pe);
+    public:
+        OptionalHdrWrapper(PEFile* pe);
 
-		FieldOffset GetFieldOffset() const { return field_offset_; }
-		std::string GetFieldName() const;
-		BYTE* GetFieldValue() const;
-		std::string GetFieldDescription() const;
-		FieldType GetFieldType() const { return field_type_; }
-		size_t GetFieldsCount() const { return Fields::FIELDS_COUNT; }
+        FieldOffset GetFieldOffset() const { return field_offset_; }
+        std::string GetFieldName() const;
+        BYTE* GetFieldValue() const;
+        std::string GetFieldDescription() const;
+        FieldType GetFieldType() const { return field_type_; }
+        size_t GetFieldsCount() const { return Fields::FIELDS_COUNT; }
 
-		bool IsFieldDescribed() const;
+        bool IsFieldDescribed() const;
 
-		std::map<WORD, std::string> GetDllCharacteristics() const;
+        std::map<WORD, std::string> GetDllCharacteristics() const;
 
-		std::string GetDataDirEntryName() const;
-		size_t GetDataDirEntriesCount() const { return DataDirEntries::DATA_DIR_ENTRIES_COUNT; }
+        std::string GetDataDirEntryName() const;
+        size_t GetDataDirEntriesCount() const { return DataDirEntries::DATA_DIR_ENTRIES_COUNT; }
 
-		IMAGE_DATA_DIRECTORY* GetDataDir() const;
+        IMAGE_DATA_DIRECTORY* GetDataDir() const;
 
-		void LoadNextField();
-		void Reset();
+        void LoadNextField();
+        void Reset();
 
-		void* GetOptionalHdr() const;
-		offset_t GetOptionalHdrOffset() const { return optional_hdr_offset_; }
-		size_t GetOptionalHdrSize() const;
-		OptHdrType GetOptionalHdrType() const;
-	private:
-		std::string MagicDescription() const;
-		std::string SubsystemDescription() const;
-	private:
-		IMAGE_OPTIONAL_HEADER32* optional_hdr32_;
-		IMAGE_OPTIONAL_HEADER64* optional_hdr64_;
-		offset_t optional_hdr_offset_;
+        void* GetOptionalHdr() const;
+        offset_t GetOptionalHdrOffset() const { return optional_hdr_offset_; }
+        size_t GetOptionalHdrSize() const;
+        OptHdrType GetOptionalHdrType() const;
+    private:
+        std::string MagicDescription() const;
+        std::string SubsystemDescription() const;
+    private:
+        IMAGE_OPTIONAL_HEADER32* optional_hdr32_;
+        IMAGE_OPTIONAL_HEADER64* optional_hdr64_;
+        offset_t optional_hdr_offset_;
 
-		FieldOffset field_offset_;
-		FieldIndex field_index_;
-		FieldType field_type_;
+        FieldOffset field_offset_;
+        FieldIndex field_index_;
+        FieldType field_type_;
 
-		index_t data_dir_entry_;
+        index_t data_dir_entry_;
 
-		PEFile* related_pe_;
-	};
+        PEFile* related_pe_;
+    };
 }
