@@ -86,7 +86,7 @@ Get File Header:
 ```c++
 FileHdrWrapper* file_hdr_wrapper = pe->GetFileHdrWrapper();
 
-std::cout << std::hex;
+std::cout << std::hex << std::uppercase;
 for (size_t field = 0; field < file_hdr_wrapper->GetFieldsCount(); field++)
 {
     std::cout << file_hdr_wrapper->GetFieldOffset() << "\t";
