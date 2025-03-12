@@ -1,0 +1,31 @@
+# Visual Studio
+*.sln
+*.vcxproj
+*.filters
+*.user
+.vs/
+
+# Directories
+build/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+#Make
+makefile
+*.make
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+install_manifest.txt
+CPackConfig.cmake
+CPackSourceConfig.cmake
+_CPack_Packages/
+*.ninja
+*.ninja_deps
+*.ninja_log
