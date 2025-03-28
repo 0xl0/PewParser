@@ -6,7 +6,7 @@
 
 namespace PewParser {
 
-    RawFile LoadFile(const std::filesystem::path& filepath)
+    static RawFile LoadFile(const std::filesystem::path& filepath)
     {
         std::ifstream file(filepath, std::ios::binary);
         if (file.is_open())
