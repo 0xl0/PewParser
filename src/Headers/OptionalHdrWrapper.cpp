@@ -17,6 +17,8 @@ namespace PewParser {
         field_index_ = Fields::MAGIC;
         field_type_ = FieldType::WORD;
         data_dir_entry_ = DataDirEntries::EXP;
+
+        UpdateDllCharacteristics();
     }
 
     std::string OptionalHdrWrapper::GetFieldName() const
@@ -81,8 +83,11 @@ namespace PewParser {
         return false;
     }
 
-    std::map<WORD, std::string> OptionalHdrWrapper::GetDllCharacteristics() const
+    void OptionalHdrWrapper::UpdateDllCharacteristics()
     {
+        if(!dll_characteristics_.empty())
+            dll_characteristics_.clear();
+
         WORD dll_characteristics = 0;
 
         if (optional_hdr32_)
@@ -90,39 +95,35 @@ namespace PewParser {
         else
             dll_characteristics = optional_hdr64_->DllCharacteristics;
 
-        std::map<WORD, std::string> result;
-
         if (dll_characteristics & IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE)
-            result[IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE] = "DLL can be relocated at load time";
+            dll_characteristics_[IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE] = "DLL can be relocated at load time";
 
         if (dll_characteristics & IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY)
-            result[IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY] = "Code Integrity checks are enforced";
+            dll_characteristics_[IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY] = "Code Integrity checks are enforced";
 
         if (dll_characteristics & IMAGE_DLLCHARACTERISTICS_NX_COMPAT)
-            result[IMAGE_DLLCHARACTERISTICS_NX_COMPAT] = "Image is NX compatible";
+            dll_characteristics_[IMAGE_DLLCHARACTERISTICS_NX_COMPAT] = "Image is NX compatible";
 
         if (dll_characteristics & IMAGE_DLLCHARACTERISTICS_NO_ISOLATION)
-            result[IMAGE_DLLCHARACTERISTICS_NO_ISOLATION] = "Isolation aware, but do not isolate the image";
+            dll_characteristics_[IMAGE_DLLCHARACTERISTICS_NO_ISOLATION] = "Isolation aware, but do not isolate the image";
 
         if (dll_characteristics & IMAGE_DLLCHARACTERISTICS_NO_SEH)
-            result[IMAGE_DLLCHARACTERISTICS_NO_SEH] = "No structured exception (SEH) handling";
+            dll_characteristics_[IMAGE_DLLCHARACTERISTICS_NO_SEH] = "No structured exception (SEH) handling";
 
         if (dll_characteristics & IMAGE_DLLCHARACTERISTICS_NO_BIND)
-            result[IMAGE_DLLCHARACTERISTICS_NO_BIND] = "Do not bind the image";
+            dll_characteristics_[IMAGE_DLLCHARACTERISTICS_NO_BIND] = "Do not bind the image";
 
         if (dll_characteristics & IMAGE_DLLCHARACTERISTICS_APPCONTAINER)
-            result[IMAGE_DLLCHARACTERISTICS_APPCONTAINER] = "Image must execute in an AppContainer";
+            dll_characteristics_[IMAGE_DLLCHARACTERISTICS_APPCONTAINER] = "Image must execute in an AppContainer";
 
         if (dll_characteristics & IMAGE_DLLCHARACTERISTICS_WDM_DRIVER)
-            result[IMAGE_DLLCHARACTERISTICS_WDM_DRIVER] = "A WDM driver";
+            dll_characteristics_[IMAGE_DLLCHARACTERISTICS_WDM_DRIVER] = "A WDM driver";
 
         if (dll_characteristics & IMAGE_DLLCHARACTERISTICS_GUARD_CF)
-            result[IMAGE_DLLCHARACTERISTICS_GUARD_CF] = "Image supports Control Flow Guard";
+            dll_characteristics_[IMAGE_DLLCHARACTERISTICS_GUARD_CF] = "Image supports Control Flow Guard";
 
         if (dll_characteristics & IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE)
-            result[IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE] = "Terminal Server aware";
-
-        return result;
+            dll_characteristics_[IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE] = "Terminal Server aware";
     }
 
     std::string OptionalHdrWrapper::GetDataDirEntryName() const

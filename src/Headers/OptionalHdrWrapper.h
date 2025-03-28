@@ -59,7 +59,8 @@ namespace PewParser {
 
         bool IsFieldDescribed() const;
 
-        std::map<WORD, std::string> GetDllCharacteristics() const;
+        const auto& GetDllCharacteristics() const { return dll_characteristics_; }
+        void UpdateDllCharacteristics();
 
         std::string GetDataDirEntryName() const;
         size_t GetDataDirEntriesCount() const { return DataDirEntries::DATA_DIR_ENTRIES_COUNT; }
@@ -86,6 +87,8 @@ namespace PewParser {
         FieldType field_type_;
 
         index_t data_dir_entry_;
+
+        std::map<WORD, std::string_view> dll_characteristics_;
 
         PEFile* related_pe_;
     };

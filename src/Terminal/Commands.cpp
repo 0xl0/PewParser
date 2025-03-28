@@ -38,17 +38,17 @@ namespace PewParser {
     {
         std::string lower = StrLower(cmd);
 
-        if (lower == "doshdr")                return Command::DOS_HDR;
-        else if (lower == "filehdr")        return Command::FILE_HDR;
-        else if (lower == "opthdr")            return Command::OPT_HDR;
-        else if (lower == "sechdrs")        return Command::SEC_HDRS;
-        else if (lower == "exportdir")        return Command::EXPORT_DIR;
-        else if (lower == "exports")        return Command::EXPORTS;
-        else if (lower == "imports")        return Command::IMPORTS;
+        if (lower == "doshdr")               return Command::DOS_HDR;
+        else if (lower == "filehdr")         return Command::FILE_HDR;
+        else if (lower == "opthdr")          return Command::OPT_HDR;
+        else if (lower == "sechdrs")         return Command::SEC_HDRS;
+        else if (lower == "exportdir")       return Command::EXPORT_DIR;
+        else if (lower == "exports")         return Command::EXPORTS;
+        else if (lower == "imports")         return Command::IMPORTS;
         else if (lower == "rsrc")            return Command::RSRC_DIR;
         else if (lower == "boundimports")    return Command::BOUND_IMPORTS;
-        else if (lower == "debug")            return Command::DEBUG_DIR;
-        else                                return Command::INVALID;
+        else if (lower == "debug")           return Command::DEBUG_DIR;
+        else                                 return Command::INVALID;
     }
 
     void Commands::PrintDosHdr()
@@ -121,7 +121,7 @@ namespace PewParser {
             file_hdr_wrapper->LoadNextField();
         }
 
-        auto characteristics = file_hdr_wrapper->GetCharacteristics();
+        const auto& characteristics = file_hdr_wrapper->GetCharacteristics();
         for (const auto& [value, description] : characteristics)
         {
             std::cout << " " << std::setw(OFFSET_W + FILE_HDR_NAME_W) << "";
@@ -155,7 +155,7 @@ namespace PewParser {
                 std::cout << std::setw(OPTIONAL_HDR_NAME_W) << optional_hdr_wrapper->GetFieldName();
                 std::cout << std::setw(OPTIONAL_HDR_VALUE_W) << *(WORD*)optional_hdr_wrapper->GetFieldValue() << std::setw(OPTIONAL_HDR_DESCRIPTION_W) << "" << Logger::ResetColor() << std::endl;
 
-                auto dll_characteristics = optional_hdr_wrapper->GetDllCharacteristics();
+                const auto& dll_characteristics = optional_hdr_wrapper->GetDllCharacteristics();
                 for (const auto& [value, description] : dll_characteristics)
                 {
                     std::cout << " " << std::setw(OFFSET_W + OPTIONAL_HDR_NAME_W) << "";

@@ -12,6 +12,8 @@ namespace PewParser {
         field_offset_= file_hdr_offset_;
         field_index_ = Fields::MACHINE;
         field_type_ = FieldType::WORD;
+
+        UpdateCharacteristics();
     }
 
     std::string FileHdrWrapper::GetFieldName() const
@@ -91,56 +93,57 @@ namespace PewParser {
         }
     }
 
-    std::map<WORD, std::string> FileHdrWrapper::GetCharacteristics()
+    void FileHdrWrapper::UpdateCharacteristics()
     {
-        std::map<WORD, std::string> result;
+        if(!characteristics_.empty())
+            characteristics_.clear();
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_RELOCS_STRIPPED)
-            result[IMAGE_FILE_RELOCS_STRIPPED] = "Relocation info stripped from file";
+        WORD characteristics = file_hdr_->Characteristics;
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_EXECUTABLE_IMAGE)
-            result[IMAGE_FILE_EXECUTABLE_IMAGE] = "File is executable";
+        if (characteristics & IMAGE_FILE_RELOCS_STRIPPED)
+            characteristics_[IMAGE_FILE_RELOCS_STRIPPED] = "Relocation info stripped from file";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_LINE_NUMS_STRIPPED)
-            result[IMAGE_FILE_LINE_NUMS_STRIPPED] = "COFF line numbers stripped";
+        if (characteristics & IMAGE_FILE_EXECUTABLE_IMAGE)
+            characteristics_[IMAGE_FILE_EXECUTABLE_IMAGE] = "File is executable";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_LOCAL_SYMS_STRIPPED)
-            result[IMAGE_FILE_LOCAL_SYMS_STRIPPED] = "COFF local symbols stripped";
+        if (characteristics & IMAGE_FILE_LINE_NUMS_STRIPPED)
+            characteristics_[IMAGE_FILE_LINE_NUMS_STRIPPED] = "COFF line numbers stripped";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_AGGRESIVE_WS_TRIM)
-            result[IMAGE_FILE_AGGRESIVE_WS_TRIM] = "Aggressively trim working set";
+        if (characteristics & IMAGE_FILE_LOCAL_SYMS_STRIPPED)
+            characteristics_[IMAGE_FILE_LOCAL_SYMS_STRIPPED] = "COFF local symbols stripped";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_LARGE_ADDRESS_AWARE)
-            result[IMAGE_FILE_LARGE_ADDRESS_AWARE] = "Application can handle > 2GB addresses";
+        if (characteristics & IMAGE_FILE_AGGRESIVE_WS_TRIM)
+            characteristics_[IMAGE_FILE_AGGRESIVE_WS_TRIM] = "Aggressively trim working set";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_BYTES_REVERSED_LO)
-            result[IMAGE_FILE_BYTES_REVERSED_LO] = "LE: LSB precedes MSB (deprecated)";
+        if (characteristics & IMAGE_FILE_LARGE_ADDRESS_AWARE)
+            characteristics_[IMAGE_FILE_LARGE_ADDRESS_AWARE] = "Application can handle > 2GB addresses";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_32BIT_MACHINE)
-            result[IMAGE_FILE_32BIT_MACHINE] = "32bit word machine";
+        if (characteristics & IMAGE_FILE_BYTES_REVERSED_LO)
+            characteristics_[IMAGE_FILE_BYTES_REVERSED_LO] = "LE: LSB precedes MSB (deprecated)";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_DEBUG_STRIPPED)
-            result[IMAGE_FILE_DEBUG_STRIPPED] = "Debugging stripped from file in .DBG";
+        if (characteristics & IMAGE_FILE_32BIT_MACHINE)
+            characteristics_[IMAGE_FILE_32BIT_MACHINE] = "32bit word machine";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP)
-            result[IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP] = "If image on removable media, load it and copy to swap";
+        if (characteristics & IMAGE_FILE_DEBUG_STRIPPED)
+            characteristics_[IMAGE_FILE_DEBUG_STRIPPED] = "Debugging stripped from file in .DBG";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_NET_RUN_FROM_SWAP)
-            result[IMAGE_FILE_NET_RUN_FROM_SWAP] =  "If image on network media, load it and copy to swap";
+        if (characteristics & IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP)
+            characteristics_[IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP] = "If image on removable media, load it and copy to swap";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_SYSTEM)
-            result[IMAGE_FILE_SYSTEM] = "System file, not a user program";
+        if (characteristics & IMAGE_FILE_NET_RUN_FROM_SWAP)
+            characteristics_[IMAGE_FILE_NET_RUN_FROM_SWAP] =  "If image on network media, load it and copy to swap";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_DLL)
-            result[IMAGE_FILE_DLL] = "File is a (DLL)";
+        if (characteristics & IMAGE_FILE_SYSTEM)
+            characteristics_[IMAGE_FILE_SYSTEM] = "System file, not a user program";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_UP_SYSTEM_ONLY)
-            result[IMAGE_FILE_UP_SYSTEM_ONLY] = "Run only on uniprocessor machine";
+        if (characteristics & IMAGE_FILE_DLL)
+            characteristics_[IMAGE_FILE_DLL] = "File is a (DLL)";
 
-        if (file_hdr_->Characteristics & IMAGE_FILE_BYTES_REVERSED_HI)
-            result[IMAGE_FILE_BYTES_REVERSED_HI] = "BE: MSB precedes LSB (deprecated)";
+        if (characteristics & IMAGE_FILE_UP_SYSTEM_ONLY)
+            characteristics_[IMAGE_FILE_UP_SYSTEM_ONLY] = "Run only on uniprocessor machine";
 
-        return result;
+        if (characteristics & IMAGE_FILE_BYTES_REVERSED_HI)
+            characteristics_[IMAGE_FILE_BYTES_REVERSED_HI] = "BE: MSB precedes LSB (deprecated)";
     }
 
     void FileHdrWrapper::LoadNextField()

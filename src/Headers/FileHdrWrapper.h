@@ -34,7 +34,8 @@ namespace PewParser {
 
         bool IsFieldDescribed() const;
 
-        std::map<WORD, std::string> GetCharacteristics();
+        const auto& GetCharacteristics() const { return characteristics_; }
+        void UpdateCharacteristics();
 
         void LoadNextField();
         void Reset();
@@ -54,6 +55,8 @@ namespace PewParser {
         FieldOffset field_offset_;
         FieldIndex field_index_;
         FieldType field_type_;
+
+        std::map<WORD, std::string_view> characteristics_;
 
         PEFile* related_pe_;
     };
