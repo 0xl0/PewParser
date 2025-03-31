@@ -35,7 +35,7 @@ namespace PewParser {
         }
     }
 
-    std::string ExportDirWrapper::GetFieldName() const
+    std::string_view ExportDirWrapper::GetFieldName() const
     {
         switch (field_index_)
         {

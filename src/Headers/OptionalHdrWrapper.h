@@ -51,9 +51,9 @@ namespace PewParser {
         OptionalHdrWrapper(PEFile* pe);
 
         FieldOffset GetFieldOffset() const { return field_offset_; }
-        std::string GetFieldName() const;
+        std::string_view GetFieldName() const;
         BYTE* GetFieldValue() const;
-        std::string GetFieldDescription() const;
+        std::string_view GetFieldDescription() const;
         FieldType GetFieldType() const { return field_type_; }
         size_t GetFieldsCount() const { return Fields::FIELDS_COUNT; }
 
@@ -62,7 +62,7 @@ namespace PewParser {
         const auto& GetDllCharacteristics() const { return dll_characteristics_; }
         void UpdateDllCharacteristics();
 
-        std::string GetDataDirEntryName() const;
+        std::string_view GetDataDirEntryName() const;
         size_t GetDataDirEntriesCount() const { return DataDirEntries::DATA_DIR_ENTRIES_COUNT; }
 
         IMAGE_DATA_DIRECTORY* GetDataDir() const;
@@ -75,8 +75,8 @@ namespace PewParser {
         size_t GetOptionalHdrSize() const;
         OptHdrType GetOptionalHdrType() const;
     private:
-        std::string MagicDescription() const;
-        std::string SubsystemDescription() const;
+        std::string_view MagicDescription() const;
+        std::string_view SubsystemDescription() const;
     private:
         IMAGE_OPTIONAL_HEADER32* optional_hdr32_;
         IMAGE_OPTIONAL_HEADER64* optional_hdr64_;

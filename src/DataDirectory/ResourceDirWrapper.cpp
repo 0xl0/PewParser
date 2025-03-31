@@ -61,7 +61,7 @@ namespace PewParser {
         }
     }
 
-    std::string ResourceDirWrapper::GetFieldName() const
+    std::string_view ResourceDirWrapper::GetFieldName() const
     {
         switch (field_index_)
         {
@@ -140,7 +140,7 @@ namespace PewParser {
     }
 
 
-    std::string ResourceDirWrapper::GetType() const
+    std::string_view ResourceDirWrapper::GetType() const
     {
         IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = (IMAGE_RESOURCE_DIRECTORY_ENTRY*)((BYTE*)(current_rsrc_dir_) + GetRsrcDirSize() + (sizeof(IMAGE_RESOURCE_DIRECTORY_ENTRY) * current_entry_));
 

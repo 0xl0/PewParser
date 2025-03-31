@@ -16,7 +16,7 @@ namespace PewParser {
         UpdateCharacteristics();
     }
 
-    std::string FileHdrWrapper::GetFieldName() const
+    std::string_view FileHdrWrapper::GetFieldName() const
     {
         switch (field_index_)
         {
@@ -40,7 +40,7 @@ namespace PewParser {
     {
         switch (field_index_)
         {
-            case Fields::MACHINE:      return MachineDescription();
+            case Fields::MACHINE:      return MachineDescription().data();
             case Fields::TIMESTAMP:    return PEUtils::TimeDateStampConverter(file_hdr_->TimeDateStamp);
             default:                   return std::string();
         }
@@ -54,7 +54,7 @@ namespace PewParser {
         return false;
     }
 
-    std::string FileHdrWrapper::MachineDescription() const
+    std::string_view FileHdrWrapper::MachineDescription() const
     {
         switch (file_hdr_->Machine)
         {

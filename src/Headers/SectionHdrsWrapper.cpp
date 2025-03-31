@@ -17,7 +17,7 @@ namespace PewParser {
         field_type_ = FieldType::BYTE;
     }
 
-    std::string SectionHdrsWrapper::GetFieldName() const
+    std::string_view SectionHdrsWrapper::GetFieldName() const
     {
         switch (field_index_)
         {
@@ -65,13 +65,13 @@ namespace PewParser {
         return related_pe_->GetNumOfSections();
     }
 
-    std::map<DWORD, std::string> SectionHdrsWrapper::GetCharacteristics(index_t section_index) const
+    std::map<DWORD, std::string_view> SectionHdrsWrapper::GetCharacteristics(index_t section_index) const
     {
         IMAGE_SECTION_HEADER* target_section_hdr = root_section_hdr_ + section_index;
 
         DWORD characteristics = target_section_hdr->Characteristics;
 
-        std::map<DWORD, std::string> result;
+        std::map<DWORD, std::string_view> result;
 
         if (characteristics & IMAGE_SCN_CNT_CODE)
             result[IMAGE_SCN_CNT_CODE] = "Contains executable code";

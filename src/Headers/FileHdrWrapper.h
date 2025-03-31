@@ -26,7 +26,7 @@ namespace PewParser {
         FileHdrWrapper(PEFile* pe);
 
         FieldOffset GetFieldOffset() const { return field_offset_; }
-        std::string GetFieldName() const;
+        std::string_view GetFieldName() const;
         BYTE* GetFieldValue() const;
         std::string GetFieldDescription() const;
         FieldType GetFieldType() const { return field_type_; }
@@ -47,7 +47,7 @@ namespace PewParser {
         offset_t GetFileHdrOffset() const { return file_hdr_offset_; }
         size_t GetFileHdrSize() const { return sizeof(IMAGE_FILE_HEADER); }
     private:
-        std::string MachineDescription() const;
+        std::string_view MachineDescription() const;
     private:
         IMAGE_FILE_HEADER* file_hdr_;
         offset_t file_hdr_offset_;

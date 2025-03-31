@@ -54,50 +54,50 @@ namespace PewParser {
             LONG_STR_DOTS = 20
         };
     public:
-        static std::string TextColor(Color color)
+        static const char* TextColor(Color color)
         {
             switch (color)
             {
-                case Color::BLACK:                return "\x1b[30m";
-                case Color::RED:                return "\x1b[31m";
-                case Color::GREEN:                return "\x1b[32m";
-                case Color::YELLOW:                return "\x1b[33m";
-                case Color::BLUE:                return "\x1b[34m";
-                case Color::MAGENTA:            return "\x1b[35m";
-                case Color::CYAN:                return "\x1b[36m";
-                case Color::WHITE:                return "\x1b[37m";
-                case Color::BRIGHT_BLACK:        return "\x1b[90m";
-                case Color::BRIGHT_RED:            return "\x1b[91m";
-                case Color::BRIGHT_GREEN:        return "\x1b[92m";
-                case Color::BRIGHT_YELLOW:        return "\x1b[93m";
-                case Color::BRIGHT_BLUE:        return "\x1b[94m";
-                case Color::BRIGHT_MAGENTA:        return "\x1b[95m";
-                case Color::BRIGHT_CYAN:        return "\x1b[96m";
-                case Color::BRIGHT_WHITE:        return "\x1b[97m";
-                default:                        return std::string();
+                case Color::BLACK:             return "\x1b[30m";
+                case Color::RED:               return "\x1b[31m";
+                case Color::GREEN:             return "\x1b[32m";
+                case Color::YELLOW:            return "\x1b[33m";
+                case Color::BLUE:              return "\x1b[34m";
+                case Color::MAGENTA:           return "\x1b[35m";
+                case Color::CYAN:              return "\x1b[36m";
+                case Color::WHITE:             return "\x1b[37m";
+                case Color::BRIGHT_BLACK:      return "\x1b[90m";
+                case Color::BRIGHT_RED:        return "\x1b[91m";
+                case Color::BRIGHT_GREEN:      return "\x1b[92m";
+                case Color::BRIGHT_YELLOW:     return "\x1b[93m";
+                case Color::BRIGHT_BLUE:       return "\x1b[94m";
+                case Color::BRIGHT_MAGENTA:    return "\x1b[95m";
+                case Color::BRIGHT_CYAN:       return "\x1b[96m";
+                case Color::BRIGHT_WHITE:      return "\x1b[97m";
+                default:                       return "";
             }
         }
-        static std::string BgColor(Color color)
+        static const char* BgColor(Color color)
         {
             switch (color)
             {
-                case Color::BLACK:                return "\x1b[40m";
-                case Color::RED:                return "\x1b[41m";
-                case Color::GREEN:                return "\x1b[42m";
-                case Color::YELLOW:                return "\x1b[43m";
-                case Color::BLUE:                return "\x1b[44m";
-                case Color::MAGENTA:            return "\x1b[45m";
-                case Color::CYAN:                return "\x1b[46m";
-                case Color::WHITE:                return "\x1b[47m";
-                case Color::BRIGHT_BLACK:        return "\x1b[100m";
-                case Color::BRIGHT_RED:            return "\x1b[101m";
-                case Color::BRIGHT_GREEN:        return "\x1b[102m";
-                case Color::BRIGHT_YELLOW:        return "\x1b[103m";
-                case Color::BRIGHT_BLUE:        return "\x1b[104m";
-                case Color::BRIGHT_MAGENTA:        return "\x1b[105m";
-                case Color::BRIGHT_CYAN:        return "\x1b[106m";
-                case Color::BRIGHT_WHITE:        return "\x1b[107m";
-                default:                        return std::string();
+                case Color::BLACK:             return "\x1b[40m";
+                case Color::RED:               return "\x1b[41m";
+                case Color::GREEN:             return "\x1b[42m";
+                case Color::YELLOW:            return "\x1b[43m";
+                case Color::BLUE:              return "\x1b[44m";
+                case Color::MAGENTA:           return "\x1b[45m";
+                case Color::CYAN:              return "\x1b[46m";
+                case Color::WHITE:             return "\x1b[47m";
+                case Color::BRIGHT_BLACK:      return "\x1b[100m";
+                case Color::BRIGHT_RED:        return "\x1b[101m";
+                case Color::BRIGHT_GREEN:      return "\x1b[102m";
+                case Color::BRIGHT_YELLOW:     return "\x1b[103m";
+                case Color::BRIGHT_BLUE:       return "\x1b[104m";
+                case Color::BRIGHT_MAGENTA:    return "\x1b[105m";
+                case Color::BRIGHT_CYAN:       return "\x1b[106m";
+                case Color::BRIGHT_WHITE:      return "\x1b[107m";
+                default:                       return "";
             }
         }
         static std::string CustomTextColor(uint32_t color_id)
@@ -118,7 +118,7 @@ namespace PewParser {
             sprintf(fmt, "\x1b[48;5;%dm", color_id);
             return fmt;
         }
-        static std::string ResetColor()
+        static const char* ResetColor()
         {
             return "\x1b[0m";
         }
@@ -147,7 +147,7 @@ namespace PewParser {
         {
             char fmt_buffer[64] = {};
 
-            std::sprintf(fmt_buffer, "%s[%s] %s %s%s", TextColor(color).c_str(), GetTime().c_str(), prefix, fmt, ResetColor().c_str());
+            std::sprintf(fmt_buffer, "%s[%s] %s %s%s", TextColor(color), GetTime().c_str(), prefix, fmt, ResetColor());
             std::printf(fmt_buffer, std::forward<Args&&>(args)...);
         }
 

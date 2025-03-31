@@ -27,7 +27,7 @@ namespace PewParser {
         ExportDirWrapper(PEFile* pe);
 
         FieldOffset GetFieldOffset() const { return field_offset_; }
-        std::string GetFieldName() const;
+        std::string_view GetFieldName() const;
         BYTE* GetFieldValue() const;
         std::string GetFieldDescription() const;
         FieldType GetFieldType() const { return field_type_; }

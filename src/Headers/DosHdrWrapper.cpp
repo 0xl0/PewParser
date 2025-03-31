@@ -12,7 +12,7 @@ namespace PewParser {
         field_index_ = Fields::MAGIC;
     }
 
-    std::string DosHdrWrapper::GetFieldName() const
+    std::string_view DosHdrWrapper::GetFieldName() const
     {
         switch (field_index_)
         {

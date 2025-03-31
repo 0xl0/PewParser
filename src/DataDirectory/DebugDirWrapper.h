@@ -22,7 +22,7 @@ namespace PewParser {
         DebugDirWrapper(PEFile* pe);
 
         FieldOffset GetFieldOffset() const { return field_offset_; }
-        std::string GetFieldName() const;
+        std::string_view GetFieldName() const;
         BYTE* GetFieldValue() const;
         std::string GetFieldDescription() const;
         FieldType GetFieldType() const { return field_type_; }
@@ -39,7 +39,7 @@ namespace PewParser {
         offset_t GetDebugDirOffset() { return debug_dir_offset_; }
         size_t GetDebugDirSize() { return sizeof(IMAGE_DEBUG_DIRECTORY); }
     private:
-        std::string GetTypeDescription() const;
+        std::string_view GetTypeDescription() const;
     private:
         void Init();
     private:

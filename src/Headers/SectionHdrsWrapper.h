@@ -30,7 +30,7 @@ namespace PewParser {
         SectionHdrsWrapper(PEFile* pe);
 
         FieldOffset GetFieldOffset() const { return field_offset_; }
-        std::string GetFieldName() const;
+        std::string_view GetFieldName() const;
         BYTE* GetFieldValue() const;
         FieldType GetFieldType() const { return field_type_; }
         size_t GetFieldsCount() const { return Fields::FIELDS_COUNT; }
@@ -41,7 +41,7 @@ namespace PewParser {
 
         size_t GetNumOfSections() const;
 
-        std::map<DWORD, std::string> GetCharacteristics(index_t section_index) const;
+        std::map<DWORD, std::string_view> GetCharacteristics(index_t section_index) const;
 
         void LoadNextField();
         void Reset();

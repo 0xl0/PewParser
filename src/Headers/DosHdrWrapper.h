@@ -37,7 +37,7 @@ namespace PewParser {
         DosHdrWrapper(PEFile* pe);
 
         FieldOffset GetFieldOffset() const { return field_offset_; }
-        std::string GetFieldName() const;
+        std::string_view GetFieldName() const;
         BYTE* GetFieldValue() const;
         size_t GetFieldsCount() const { return Fields::FIELDS_COUNT; }
         

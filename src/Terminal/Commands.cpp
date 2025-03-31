@@ -600,18 +600,18 @@ namespace PewParser {
 
             switch (c)
             {
-            case Command::DOS_HDR:                PrintDosHdr();                    break;
-            case Command::FILE_HDR:                PrintFileHdr();                    break;
-            case Command::OPT_HDR:                PrintOptHdr();                    break;
-            case Command::SEC_HDRS:                PrintSecHdrs();                    break;
-            case Command::EXPORT_DIR:            PrintExportDir();                break;
-            case Command::EXPORTS:                PrintExports();                    break;
-            case Command::IMPORTS:                PrintImports();                    break;
-            case Command::RSRC_DIR:                PrintRsrcDir();                    break;
-            case Command::DEBUG_DIR:            PrintDebugDir();                break;
-            case Command::BOUND_IMPORTS:        PrintBoundImportsDir();            break;
-            default:
-                PEW_ERROR("Invalid Command\n");
+                case Command::DOS_HDR:          PrintDosHdr();             break;
+                case Command::FILE_HDR:         PrintFileHdr();            break;
+                case Command::OPT_HDR:          PrintOptHdr();             break;
+                case Command::SEC_HDRS:         PrintSecHdrs();            break;
+                case Command::EXPORT_DIR:       PrintExportDir();          break;
+                case Command::EXPORTS:          PrintExports();            break;
+                case Command::IMPORTS:          PrintImports();            break;
+                case Command::RSRC_DIR:         PrintRsrcDir();            break;
+                case Command::DEBUG_DIR:        PrintDebugDir();           break;
+                case Command::BOUND_IMPORTS:    PrintBoundImportsDir();    break;
+                default:
+                    PEW_ERROR("Invalid Command\n");
             }
         }
     }

@@ -37,7 +37,7 @@ namespace PewParser {
         }
     }
 
-    std::string BoundImportDirWrapper::GetFieldName() const
+    std::string_view BoundImportDirWrapper::GetFieldName() const
     {
         if (IsForwarderRef() && field_index_ == MODULE_FORWARDERS_NUM)
             return "Reserverd";

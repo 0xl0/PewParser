@@ -21,7 +21,7 @@ namespace PewParser {
         UpdateDllCharacteristics();
     }
 
-    std::string OptionalHdrWrapper::GetFieldName() const
+    std::string_view OptionalHdrWrapper::GetFieldName() const
     {
         switch (field_index_)
         {
@@ -65,7 +65,7 @@ namespace PewParser {
         return related_pe_->GetContentAt(field_offset_, OffsetType::RAW);
     }
 
-    std::string OptionalHdrWrapper::GetFieldDescription() const
+    std::string_view OptionalHdrWrapper::GetFieldDescription() const
     {
         switch (field_index_)
         {
@@ -126,7 +126,7 @@ namespace PewParser {
             dll_characteristics_[IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE] = "Terminal Server aware";
     }
 
-    std::string OptionalHdrWrapper::GetDataDirEntryName() const
+    std::string_view OptionalHdrWrapper::GetDataDirEntryName() const
     {
         switch (data_dir_entry_)
         {
@@ -149,7 +149,7 @@ namespace PewParser {
         }
     }
 
-    std::string OptionalHdrWrapper::MagicDescription() const
+    std::string_view OptionalHdrWrapper::MagicDescription() const
     {
         WORD magic = 0;
 
@@ -167,7 +167,7 @@ namespace PewParser {
         }
     }
 
-    std::string OptionalHdrWrapper::SubsystemDescription() const
+    std::string_view OptionalHdrWrapper::SubsystemDescription() const
     {
         WORD subsystem = 0;
 

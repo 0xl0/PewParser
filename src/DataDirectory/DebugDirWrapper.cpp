@@ -32,7 +32,7 @@ namespace PewParser {
         }
     }
 
-    std::string DebugDirWrapper::GetFieldName() const
+    std::string_view DebugDirWrapper::GetFieldName() const
     {
         switch (field_index_)
         {
@@ -58,12 +58,12 @@ namespace PewParser {
         switch (field_index_)
         {
             case Fields::TIMESTAMP:    return PEUtils::TimeDateStampConverter(debug_dir_->TimeDateStamp);
-            case Fields::TYPE:         return GetTypeDescription();
+            case Fields::TYPE:         return GetTypeDescription().data();
             default:                   return std::string();
         }
     }
 
-    std::string DebugDirWrapper::GetTypeDescription() const
+    std::string_view DebugDirWrapper::GetTypeDescription() const
     {
         switch (debug_dir_->Type)
         {

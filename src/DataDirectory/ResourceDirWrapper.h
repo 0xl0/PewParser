@@ -53,7 +53,7 @@ namespace PewParser {
         ResourceDirWrapper(PEFile* pe);
 
         FieldOffset GetFieldOffset() const { return field_offset_; }
-        std::string GetFieldName() const;
+        std::string_view GetFieldName() const;
         BYTE* GetFieldValue() const;
         std::string GetFieldDescription() const;
         FieldType GetFieldType() const { return field_type_; }
@@ -68,7 +68,7 @@ namespace PewParser {
         bool IsDirectory() const;
 
         std::string GetName() const;
-        std::string GetType() const;
+        std::string_view GetType() const;
         DWORD GetNameValue() const;
         offset_t GetNameOffset() const;
         DWORD GetDataValue() const;
