@@ -71,7 +71,7 @@ namespace PewParser {
         {
             case Fields::MAGIC:     return MagicDescription();
             case Fields::SUBSYS:    return SubsystemDescription();
-            default:                return std::string();
+            default:                return std::string_view();
         }
     }
 

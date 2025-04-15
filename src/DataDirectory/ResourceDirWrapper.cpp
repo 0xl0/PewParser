@@ -132,7 +132,7 @@ namespace PewParser {
     {
         IMAGE_RESOURCE_DIRECTORY_ENTRY* entry = (IMAGE_RESOURCE_DIRECTORY_ENTRY*)((BYTE*)(current_rsrc_dir_) + GetRsrcDirSize() + (sizeof(IMAGE_RESOURCE_DIRECTORY_ENTRY) * current_entry_));
 
-        IMAGE_RESOURCE_DIR_STRING_U* str_u = (_IMAGE_RESOURCE_DIR_STRING_U*)related_pe_->GetContentAt(root_rsrc_dir_offset_ + entry->NameOffset, OffsetType::RAW);
+        IMAGE_RESOURCE_DIR_STRING_U* str_u = (IMAGE_RESOURCE_DIR_STRING_U*)related_pe_->GetContentAt(root_rsrc_dir_offset_ + entry->NameOffset, OffsetType::RAW);
 
         std::string name = Utf16ToUtf8(str_u->NameString, str_u->Length);
 

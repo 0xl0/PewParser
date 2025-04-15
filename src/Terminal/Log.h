@@ -139,7 +139,7 @@ namespace PewParser {
             if (color != Color::NONE)
                 format << ResetColor();
 
-            std::printf(format.str().c_str(), std::forward<Args&&>(args)...);
+            printf(format.str().c_str(), std::forward<Args&&>(args)...);
         }
 
         template<typename... Args>
@@ -147,8 +147,8 @@ namespace PewParser {
         {
             char fmt_buffer[64] = {};
 
-            std::sprintf(fmt_buffer, "%s[%s] %s %s%s", TextColor(color), GetTime().c_str(), prefix, fmt, ResetColor());
-            std::printf(fmt_buffer, std::forward<Args&&>(args)...);
+            sprintf(fmt_buffer, "%s[%s] %s %s%s", TextColor(color), GetTime().c_str(), prefix, fmt, ResetColor());
+            printf(fmt_buffer, std::forward<Args&&>(args)...);
         }
 
         template<typename... Args>

@@ -89,7 +89,7 @@ namespace PewParser {
             case IMAGE_DEBUG_TYPE_SPGO:
             case IMAGE_DEBUG_TYPE_EX_DLLCHARACTERISTICS:
                 */
-            default:                            return std::string();
+            default:                            return std::string_view();
         }
     }
 

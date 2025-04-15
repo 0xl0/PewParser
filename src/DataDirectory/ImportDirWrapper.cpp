@@ -224,7 +224,7 @@ namespace PewParser {
 
     WORD ImportDirWrapper::GetHint() const
     {
-        _IMAGE_IMPORT_BY_NAME* hint_and_name = GetHintAndName();
+        IMAGE_IMPORT_BY_NAME* hint_and_name = GetHintAndName();
 
         return hint_and_name->Hint;
     }
