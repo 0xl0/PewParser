@@ -560,7 +560,9 @@ namespace PewParser {
                     if (!(field == DebugDirWrapper::Fields::RAW_DATA_ADDR || field == DebugDirWrapper::Fields::RAW_DATA_PTR))
                         std::cout << std::setw(DEBUG_DIR_VALUE_W);
 
-                    if (field == DebugDirWrapper::Fields::RAW_DATA_ADDR || field == DebugDirWrapper::Fields::RAW_DATA_PTR)
+                    if (field == DebugDirWrapper::Fields::RAW_DATA_ADDR)
+                        std::cout << Logger::CustomTextColor(Logger::CustomPEColors::RVA) << std::setw(DEBUG_DIR_VALUE_W) << *(DWORD*)debug_dir_wrapper->GetFieldValue() << Logger::TextColor(Logger::Color::BLACK);
+                    else if (field == DebugDirWrapper::Fields::RAW_DATA_PTR)
                         std::cout << Logger::CustomTextColor(Logger::CustomPEColors::RAW) << std::setw(DEBUG_DIR_VALUE_W) << *(DWORD*)debug_dir_wrapper->GetFieldValue() << Logger::TextColor(Logger::Color::BLACK);
                     else if (debug_dir_wrapper->GetFieldType() == FieldType::DWORD)
                         std::cout << *(DWORD*)debug_dir_wrapper->GetFieldValue();
